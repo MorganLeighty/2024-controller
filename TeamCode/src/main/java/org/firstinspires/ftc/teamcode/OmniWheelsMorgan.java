@@ -124,6 +124,11 @@ public class OmniWheels extends LinearOpMode {
             double lateral =  gamepad1.right_stick_x;  // Strafe left/right
             double yaw     =  gamepad1.left_stick_x; // Rotate left/right
 
+            double raise = gamepad2.right_trigger 
+            double lower = gamepad2.left_trigger
+            double rotate = gamepad2.left_stick_x
+            double pinch = gamepad2.right_stick_y
+
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double leftFrontPower  = axial + lateral + yaw;
@@ -143,7 +148,14 @@ public class OmniWheels extends LinearOpMode {
                 leftBackPower   /= max;
                 rightBackPower  /= max;
             }
-
+            if (raise == true){
+                upPincirdown.setPosition(1);
+            } else if (not raised == true){ 
+                upPincirdown.setPosition(0);
+            } 
+            
+            
+                                
             // This is test code:
             //
             // Uncomment the following code to test your motor directions.
