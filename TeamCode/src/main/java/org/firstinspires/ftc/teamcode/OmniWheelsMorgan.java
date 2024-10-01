@@ -34,6 +34,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import java.util.List;
+import java.until.ArrayList;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -77,6 +79,8 @@ public class OmniWheels extends LinearOpMode {
     private DcMotor upPincirdown = null;
     private DcMotor horizontalRotatevertical = null;
 
+    List <DcMotor> allMotors
+    
     @Override
     public void runOpMode() {
 
@@ -89,7 +93,16 @@ public class OmniWheels extends LinearOpMode {
         openAndclose = hardwareMap.get(DcMotor.class, "openAndclose");
         upPincirdown = hardwareMap.get(DcMotor.class, "upPincirdown");
         horizontalRotatevertical = hardwareMap.get(DcMotor.class, "horizontalRotatevertical");
-      
+
+        
+        allMotors.add(leftFrontDrive);
+        allMotors.add(leftBackDrive);
+        allMotors.add(rightFrontDrive);
+        allMotors.add(rightBackDrive);
+        allMotors.add(openAndclose);
+        allMotors.add(upPincirdown);
+        allMotors.add(horizontalRotatevertical);
+            
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -150,10 +163,24 @@ public class OmniWheels extends LinearOpMode {
             }
             if (raise == true){
                 upPincirdown.setPosition(1);
-            } else if (not raised == true){ 
-                upPincirdown.setPosition(0);
             } 
-            
+            if (lower == true){
+                upPincirdown.setPosition(0);
+            }
+            if (rotate == true){
+                horizontalRotatevertical.setPosition(1);
+            }
+            if (rotate == false){
+               horizontalRotatevertical.setPosition(-1);
+            }
+            if (pinch == true){
+                openAndclose.setPosition(-1);
+            }
+            if (pinch == false){
+                openAndclose.setPosition(1);
+            }
+                
+
             
                                 
             // This is test code:
@@ -179,10 +206,13 @@ public class OmniWheels extends LinearOpMode {
             leftBackDrive.setPower(leftBackPower);
             rightBackDrive.setPower(rightBackPower);
 
-            // Show the elapsed game time and wheel power.
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
-            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            //Show the elapsed game time and wheel power.
+            // telemetry.addData("Status", "Run Time: " + runtime.toString());
+            // telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
+            // telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            for (DcMotor thisMotor in allMotors){
+                telemetry.addData("MotorSpeed", thisMotor.getSpeed());
+            }
             telemetry.update();
         }
     }}
