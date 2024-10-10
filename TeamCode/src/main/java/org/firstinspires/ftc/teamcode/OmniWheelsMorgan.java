@@ -79,7 +79,7 @@ public class OmniWheels extends LinearOpMode {
     private DcMotor upPincirdown = null;
     private DcMotor horizontalRotatevertical = null;
 
-    List <DcMotor> allMotors
+    List <DcMotor> allMotors;
     
     @Override
     public void runOpMode() {
@@ -137,10 +137,10 @@ public class OmniWheels extends LinearOpMode {
             double lateral =  gamepad1.right_stick_x;  // Strafe left/right
             double yaw     =  gamepad1.left_stick_x; // Rotate left/right
 
-            double raise = gamepad2.right_trigger 
-            double lower = gamepad2.left_trigger
-            double rotate = gamepad2.left_stick_x
-            double pinch = gamepad2.right_stick_y
+            double raise = gamepad2.right_trigger; 
+            double lower = gamepad2.left_trigger;
+            double rotate = gamepad2.left_stick_x;
+            double pinch = gamepad2.right_stick_y;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -210,7 +210,7 @@ public class OmniWheels extends LinearOpMode {
             // telemetry.addData("Status", "Run Time: " + runtime.toString());
             // telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             // telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
-            for (DcMotor thisMotor in allMotors){
+            for (DcMotor thisMotor : allMotors){
                 telemetry.addData("MotorSpeed", thisMotor.getSpeed());
             }
             telemetry.update();
